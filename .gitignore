@@ -1,0 +1,6 @@
+.history/
+.vscode/
+data/
+datasets/
+results/
+__pycache__/

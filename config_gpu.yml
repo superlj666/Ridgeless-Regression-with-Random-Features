@@ -1,0 +1,28 @@
+# searchSpaceFile: search_space.json
+
+searchSpace:
+  kernel_par:
+    _type: choice
+    _value: [0.0001, 0.001, 0.01, 0.1, 1.01, 10.01]
+  lambda_reg:
+    _type: choice
+    _value: [0.001, 0.01, 0.1, 1.001, 10.001, 100.001]
+  lr:
+    _type: choice
+    _value: [0.00001, 0.0001, 0.001, 0.01]
+
+trialCommand: python3 parameter_tune.py --dataset wine
+trialGpuNumber: 1
+trialConcurrency: 4
+maxTrialNumber: 30
+# tuner:
+#   name: TPE
+tuner:
+  name: TPE
+  classArgs:
+    optimize_mode: minimize
+trainingService:  # For other platforms, check mnist-pytorch example
+  platform: local
+  maxTrialNumberPerGpu: 2
+  useActiveGpu: true  # NOTE: Use "true" if you are using an OS with graphical interface (e.g. Windows 10, Ubuntu desktop)
+                       # Check the doc for details: https://nni.readthedocs.io/en/latest/reference/experiment_config.html#useactivegpu
